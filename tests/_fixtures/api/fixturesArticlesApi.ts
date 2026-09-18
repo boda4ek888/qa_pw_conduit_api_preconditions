@@ -15,7 +15,10 @@ export const test = base.extend<{
     await use(client);
   },
 
-  // registeredUser, logger, and pages are available from other fixture files after mergeTests
+  // All fixture dependencies (registeredUser, logger, pages) are resolved at runtime
+  // through Playwright's mergeTests() in tests/_fixtures/fixtures.ts:
+  // - registeredUser is defined in fixturesUsersApi.ts
+  // - logger and pages are defined in fixturesGeneric.ts
   createdArticleAndPage: async (
     { registeredUser, articlesApi, logger, pages },
     use,
