@@ -15,8 +15,11 @@ export const test = base.extend<{
     await use(client);
   },
 
+  // registeredUser, logger, and pages are available from other fixture files after mergeTests
   createdArticleAndPage: async (
-    { registeredUser, articlesApi, logger, pages }, use) => {
+    { registeredUser, articlesApi, logger, pages },
+    use,
+  ) => {
     const article = generateNewArticleData(logger, 1);
 
     const apiArticle = {
@@ -28,7 +31,7 @@ export const test = base.extend<{
 
     const response = await articlesApi.createArticle(
       apiArticle,
-      registeredUser.token,
+      registeredUser.token, // token is set during user registration in fixturesUsersApi.ts
     );
 
     await articlesApi.assertSuccessResponseCode(response);
